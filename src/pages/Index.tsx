@@ -5,6 +5,7 @@ import { ProgressBar } from "@/components/ProgressBar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Leaf, 
   TrendingUp, 
@@ -18,6 +19,15 @@ import {
 import heroImage from "@/assets/hero-image.jpg";
 
 const Index = () => {
+  const { toast } = useToast();
+
+  const handleButtonClick = (title: string) => {
+    toast({
+      title: `${title} clicked!`,
+      description: "Feature coming soon. Stay tuned for exciting updates!",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
@@ -37,7 +47,11 @@ const Index = () => {
               <p className="text-lg md:text-xl text-white/90 mb-6">
                 Gamify your sustainable farming journey and make a real impact
               </p>
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90">
+              <Button 
+                size="lg" 
+                className="bg-white text-primary hover:bg-white/90"
+                onClick={() => handleButtonClick("Start Your Journey")}
+              >
                 Start Your Journey
               </Button>
             </div>
@@ -112,7 +126,7 @@ const Index = () => {
               <GameCard
                 key={index}
                 {...feature}
-                onClick={() => console.log(`Clicked ${feature.title}`)}
+                onClick={() => handleButtonClick(feature.title)}
               />
             ))}
           </div>
